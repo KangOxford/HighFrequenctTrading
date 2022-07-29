@@ -21,11 +21,10 @@ int main()
     for(auto& row: CSVRange(infile))
     {
         unsigned long min_time;
+        int max_price, quantity_sum, quantity;
         std::from_chars(row[0].data(), row[0].data() + row[0].size(), min_time);
-        int max_price, quantity_sum;
-        std::from_chars(row[3].data(), row[3].data() + row[3].size(), max_price);
-        int quantity;
         std::from_chars(row[2].data(), row[2].data() + row[2].size(), quantity);
+        std::from_chars(row[3].data(), row[3].data() + row[3].size(), max_price);
 
         string key = std::string{row[1]};
         if (RunningData.find(key) == RunningData.end()) //if it is a new key
@@ -37,12 +36,16 @@ int main()
             quantity_sum = std::get<4>(RunningData.find(key)->second) + quantity;
             double WeightedAveragePirce = std::get<1>(RunningData.find(key)->second) * (quantity_sum-quantity)/quantity_sum + 1.0 * quantity*max_price/quantity_sum;
             max_price = std::max(max_price,std::get<2>(RunningData.find(key)->second));
-            auto time = min_time;
-            min_time = std::min(std::get<0>(RunningData.find(key)->second),min_time);
-            auto diff_time = time - min_time;
+
+//            auto time = min_time;
+//            min_time = std::min(std::get<0>(RunningData.find(key)->second),min_time);
+//            auto diff_time = time - min_time;
+
+            auto diff_time = min_time - std::get<0>(RunningData.find(key)->second);
+            diff_time = std::max(diff_time, std::get<3>(RunningData.find(key)->second));
+
             RunningData.find(key)->second =std::make_tuple(min_time, WeightedAveragePirce, max_price, diff_time, quantity_sum);
-//            RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, WeightedAveragePirce, max_price, diff_time, quantity_sum)));
-//        cout <<0;
+        cout <<0;
         }
     }
 
