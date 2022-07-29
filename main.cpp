@@ -19,7 +19,7 @@ using namespace  std;
 
 int main()
 {
-    std::unordered_map<string, std::tuple<string, string, string, string>> RunningData;
+    std::unordered_map<string, std::tuple<unsigned long, string, string, unsigned long>> RunningData;
 //    std::unordered_map<string, std::tuple<unsigned long, int, int>> RunningData;
     std::ifstream file("/Users/kang/CppCourse/Trading/HFT/input.csv");
 
@@ -28,37 +28,33 @@ int main()
 //    auto judge = s1<s2;
 //    cout<< judge <<endl;
 
-    unsigned long data;
     std::string_view sv = "124";
-    std::from_chars(sv.data(), sv.data() + sv.size(), data);
 
 
-//    for(auto& row: CSVRange(file))
-//    {
-//
-//        string key = std::string{row[1]};
-//        if (RunningData.find(key) == RunningData.end()) //if it is a new key
-//        {
-//            auto min_time = row[0];
-//            auto max_time = row[0];
-//            RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, row[2], row[3], max_time)));
-//        }
-//        else //if the key has already existed
-//        {
-//            auto time_value = std::get<0>(*RunningData.find(key));
-//            auto min_time = (row[0]<time_value) ? row[0] : time_value;
-//            auto max_time = row[0];
-//            RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, row[2], row[3], max_time)));
-//        }
 
 
-//        auto iter = RunningData.find("aaa");
-//        auto value = std::get<0>(*iter);
-//        cout<< ">>> " << value <<endl;
+    for(auto& row: CSVRange(file))
+    {
+        unsigned long time;
+        std::from_chars(row[0].data(), row[0].data() + row[0].size(), time);
 
-//        RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple((unsigned long)(row[0]), (int)(row[2]), (int)(row[3])));
-//        std::cout << "4th Element(" << row[3] << ")\n";
-//    }
+        string key = std::string{row[1]};
+        if (RunningData.find(key) == RunningData.end()) //if it is a new key
+        {
+            auto min_time = time;
+            auto max_time = time;
+            RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, row[2], row[3], max_time)));
+        }
+        else //if the key has already existed
+        {
+            auto time_value = std::stoul(std::get<0>(*RunningData.find(key)), nullptr, 10);
+            auto min_time = (time<time_value) ? time : time_value;
+            auto max_time = time;
+            RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, row[2], row[3], max_time)));
+        }
+    }
+
+
 
 
 
