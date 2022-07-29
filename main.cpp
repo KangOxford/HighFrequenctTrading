@@ -12,7 +12,10 @@
 #include <vector>
 #include <string>
 #include <charconv>
+#include <map>
 #include "CSVRow.h"
+#include <iostream>
+#include <fstream>
 
 using namespace  std;
 
@@ -20,10 +23,11 @@ using namespace  std;
 
 int main()
 {
-    std::unordered_map<string, std::tuple<unsigned long, double, int, unsigned long, int>> RunningData;
-    std::ifstream file("/Users/kang/CppCourse/Trading/HFT/input.csv");
+    std::map<string, std::tuple<unsigned long, double, int, unsigned long, int>> RunningData;
+//    std::unordered_map<string, std::tuple<unsigned long, double, int, unsigned long, int>> RunningData;
+    std::ifstream infile("/Users/kang/CppCourse/Trading/HFT/input.csv");
 
-    for(auto& row: CSVRange(file))
+    for(auto& row: CSVRange(infile))
     {
         unsigned long min_time;
         std::from_chars(row[0].data(), row[0].data() + row[0].size(), min_time);
@@ -51,6 +55,17 @@ int main()
             RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, WeightedAveragePirce, max_price, diff_time, quantity_sum)));
         }
     }
+
+
+    std::vector<string> out_string(RunningData.size());
+    std::transform(RunningData.begin(),RunningData.end(),out_string.begin(),[](auto&x){return x.first+","+to_string(get<3>(x.second))+","+to_string(get<4>(x.second))+","+to_string((int)get<1>(x.second))+","+to_string(get<2>(x.second));});
+
+
+    std::ofstream outfile;
+    outfile.open ("/Users/kang/CppCourse/Trading/HFT/output.csv");
+    for_each(out_string.begin(),out_string.end(),[&outfile](auto&x){ outfile << (x +"\n");});
+    outfile.close();
+    return 0;
 
 
 
