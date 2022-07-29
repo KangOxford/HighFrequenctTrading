@@ -24,7 +24,6 @@ using namespace  std;
 int main()
 {
     std::map<string, std::tuple<unsigned long, double, int, unsigned long, int>> RunningData;
-//    std::unordered_map<string, std::tuple<unsigned long, double, int, unsigned long, int>> RunningData;
     std::ifstream infile("/Users/kang/CppCourse/Trading/HFT/input.csv");
 
     for(auto& row: CSVRange(infile))
@@ -65,44 +64,6 @@ int main()
     outfile.open ("/Users/kang/CppCourse/Trading/HFT/output.csv");
     for_each(out_string.begin(),out_string.end(),[&outfile](auto&x){ outfile << (x +"\n");});
     outfile.close();
+
     return 0;
-
-
-
-
-
-//    int i =0;
-//    for(auto iter = RunningData.begin(); iter!=RunningData.end(); iter++)
-//    {
-//        i ++;
-//        auto key = iter->first;
-//        auto value = iter->second;
-//        auto min_time = std::get<0>(value);
-//        auto max_time = std::get<0>(value);
-//        std::cout << "iteration "<<i<<"min_time "<<min_time<<endl;
-//    }
-
-
-
-
-
-
-
-    //    auto iter = RunningData.find("aaa");
-
-//    for(auto& row: CSVRange(file))
-//    {
-//        std::cout << " , " << row[0] <<  " , " << row[1] << " , " << row[2] << " , " << row[3] << ")\n";
-//    }
-
-
-//    std::unordered_map<string, std::tuple<unsigned long, int, int>> RunningData;
-//    RunningData.insert(std::make_pair("aaa",std::make_tuple(1234567, 10, 12)));
-//    auto iter = RunningData.find("aaa");
-//    int nSize = RunningData.size();
-//    std::cout<<nSize;
-//    auto lambda = [](auto x, auto y) {return x + y;}; ###
-
-
-
 }
