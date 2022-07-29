@@ -3,6 +3,7 @@
 //
 #include <unordered_map>
 #include "stdio.h"
+#include "stdlib.h"
 #include <tuple>
 #include <iterator>
 #include <iostream>
@@ -20,18 +21,7 @@ using namespace  std;
 int main()
 {
     std::unordered_map<string, std::tuple<unsigned long, string, string, unsigned long>> RunningData;
-//    std::unordered_map<string, std::tuple<unsigned long, int, int>> RunningData;
     std::ifstream file("/Users/kang/CppCourse/Trading/HFT/input.csv");
-
-//    string s1("123");
-//    string s2("122");
-//    auto judge = s1<s2;
-//    cout<< judge <<endl;
-
-    std::string_view sv = "124";
-
-
-
 
     for(auto& row: CSVRange(file))
     {
@@ -47,11 +37,23 @@ int main()
         }
         else //if the key has already existed
         {
-            auto time_value = std::stoul(std::get<0>(*RunningData.find(key)), nullptr, 10);
-            auto min_time = (time<time_value) ? time : time_value;
-            auto max_time = time;
+            auto time_value1 = std::get<0>(RunningData.find(key)->second);
+            auto time_value2 = std::get<3>(RunningData.find(key)->second);
+            auto min_time = (time > time_value1) ? time : time_value1;
+            auto max_time = (time < time_value1) ? time : time_value2;
             RunningData.insert(std::make_pair((string)(row[1]),std::make_tuple(min_time, row[2], row[3], max_time)));
         }
+    }
+
+    int i =0;
+    for(auto iter = RunningData.begin(); iter!=RunningData.end(); iter++)
+    {
+        i ++;
+        auto key = iter->first;
+        auto value = iter->second;
+        auto min_time = std::get<0>(value);
+        auto max_time = std::get<0>(value);
+        std::cout << "iteration "<<i<<"min_time "<<min_time<<endl;
     }
 
 
