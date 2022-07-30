@@ -1,4 +1,5 @@
 # HighFrequenctTrading
 High Frequenct Trading Example coding
 
-![image](https://user-images.githubusercontent.com/37290277/181867383-e7b564d9-dc76-4ed9-a64f-6d832eba2f30.png)
+<img width="535" alt="image" src="https://user-images.githubusercontent.com/37290277/181867406-57760867-e693-4830-8c1e-e7d27de96bea.png">
+
