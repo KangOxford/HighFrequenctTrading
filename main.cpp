@@ -60,7 +60,7 @@ int main()
                 quantity_sum = std::get<4>(RunningData.find(key)->second) + quantity;
                 double WeightedAveragePirce = std::get<1>(RunningData.find(key)->second) * (quantity_sum-quantity)/quantity_sum + 1.0 * quantity*max_price/quantity_sum;
                 max_price = std::max(max_price,std::get<2>(RunningData.find(key)->second));
-                auto diff_time = min_time - std::get<0>(RunningData.find(key)->second);
+                unsigned long diff_time = min_time - std::get<0>(RunningData.find(key)->second);
                 diff_time = std::max(diff_time, std::get<3>(RunningData.find(key)->second));
 
                 RunningData.find(key)->second =std::make_tuple(min_time, WeightedAveragePirce, max_price, diff_time, quantity_sum);
