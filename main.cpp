@@ -8,33 +8,33 @@
 using namespace std;
 namespace fs = std::__fs::filesystem;
 
-// ========================================================== //
-//                                                            //
-//    High Frequency Trading Engine Jul.2022                  //
-//    @Author  Kang                                           //
-//    @Contact kang.li2020@outlook.com                        //
-//    Funtion:                                                //
-//      Calculate some tech indicator                         //
-//      based on the price-quantity data                      //
-//    Dependency:                                             //
-//      CSVRow.h as an iterator of reading all kinds of csv   //
-//                                                            //
-//                                            ┌─────────┐     //
-//                                      ┌────►|splitedaa│     //
-//                                      │     └─────────┘     //
-//    ┌─────────┐  lines   ┌────────┐   │                     //
-//    │input.csv├─────────►│split.sh├───┤     ┌─────────┐     //
-//    └─────────┘          └────────┘   ├────►│splitedab│     //
-//                                      │     └─────────┘     //
-//                                      │                     //
-//                                      └────► .........      //
-//                                                            //
-//    RunningData:                                            //
-//    ┌──────┐  ┌────┬───────┬────────┬──────────┬──────┐     //
-//    │Symbol├─►│Time│WAPrice│MaxPrice│MaxTimeGap│Volume│     //
-//    └──────┘  └────┴───────┴────────┴──────────┴──────┘     //
-//                                                            //
-// ========================================================== //
+/* ========================================================== */
+/*                                                            */
+/*    High Frequency Trading Engine Jul.2022                  */
+/*    @Author  Kang                                           */
+/*    @Contact kang.li2020@outlook.com                        */
+/*    Funtion:                                                */
+/*      Calculate some tech indicator                         */
+/*      based on the price-quantity data                      */
+/*    Dependency:                                             */
+/*      CSVRow.h as an iterator of reading all kinds of csv   */
+/*                                                            */
+/*                                            ┌─────────┐     */
+/*                                      ┌────►|splitedaa│     */
+/*                                      │     └─────────┘     */
+/*    ┌─────────┐  lines   ┌────────┐   │                     */
+/*    │input.csv├─────────►│split.sh├───┤     ┌─────────┐     */
+/*    └─────────┘          └────────┘   ├────►│splitedab│     */
+/*                                      │     └─────────┘     */
+/*                                      │                     */
+/*                                      └────► .........      */
+/*                                                            */
+/*    RunningData:                                            */
+/*    ┌──────┐  ┌────┬───────┬────────┬──────────┬──────┐     */
+/*    │Symbol├─►│Time│WAPrice│MaxPrice│MaxTimeGap│Volume│     */
+/*    └──────┘  └────┴───────┴────────┴──────────┴──────┘     */
+/*                                                            */
+/* ========================================================== */
 
 int main()
 {
