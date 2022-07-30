@@ -29,6 +29,7 @@ namespace fs = std::__fs::filesystem;
 //                                      │                     //
 //                                      └────► .........      //
 //                                                            //
+//    RunningData:                                            //
 //    ┌──────┐  ┌────┬───────┬────────┬──────────┬──────┐     //
 //    │Symbol├─►│Time│WAPrice│MaxPrice│MaxTimeGap│Volume│     //
 //    └──────┘  └────┴───────┴────────┴──────────┴──────┘     //
