@@ -74,7 +74,7 @@ int main()
 
     std::ofstream outfile;
     outfile.open ("/Users/kang/CppCourse/Trading/HFT/output.csv");
-    for_each(out_string.begin(),out_string.end(),[&outfile](auto&x){ outfile << (x +"\n");});
+    std::for_each(out_string.begin(),out_string.end(),[&outfile](auto&x){ outfile << (x +"\n");});
     outfile.close();
 
     return 0;
